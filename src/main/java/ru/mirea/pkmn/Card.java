@@ -1,8 +1,11 @@
-package ru.mirea.pryazhentsevaes.pkmn;
+package ru.mirea.pkmn;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Card {
+public class Card implements Serializable {
+    public static final long serialVersionUID = 1L;
+
     private PokemonStage pokemonStage;
     private String name;
     private int hp;
@@ -120,19 +123,17 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card{" +
-                "Стадия покемона=" + pokemonStage +
-                ", Имя='" + name + '\'' +
-                ", ХП=" + hp +
-                ", Тип=" + pokemonType +
-                ", Эволюционирует из=" + evolvesFrom +
-                ", Умения=" + skills +
-                ", Уязвимость=" + weaknessType +
-                ", Сопротивление=" + resistanceType +
-                ", Цена побега='" + retreatCost + '\'' +
-                ", Сет='" + gameSet + '\'' +
-                ", Отметка легальности=" + regulationMark +
-                ", Владелец=" + pokemonOwner +
-                '}';
+        return "Имя: " + name +
+                "\nСтадия покемона: " + pokemonStage +
+                "\nХП: " + hp +
+                "\nТип: " + pokemonType +
+                "\nЭволюционирует из: " + evolvesFrom + "\n" +
+                "\nУмения: " + skills +
+                "\nУязвимость: " + weaknessType +
+                "\nСопротивление: " + resistanceType +
+                "\nЦена побега: " + retreatCost +
+                "\nСет: " + gameSet +
+                "\nОтметка легальности: " + regulationMark +
+                "\nВладелец: " + pokemonOwner;
     }
 }

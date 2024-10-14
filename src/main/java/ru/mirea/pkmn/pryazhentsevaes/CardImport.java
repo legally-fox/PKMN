@@ -1,4 +1,6 @@
-package ru.mirea.pryazhentsevaes.pkmn;
+package ru.mirea.pkmn.pryazhentsevaes;
+
+import ru.mirea.pkmn.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -8,7 +10,12 @@ public class CardImport {
     public Card card = new Card();
 
     public CardImport(String fileName) {
-        SetInfo(new File(fileName));
+        if (fileName.endsWith("txt")) {
+            SetInfo(new File("src\\main\\resources\\" + fileName));
+        }
+        else {
+            Deserialize("src\\main\\resources\\" + fileName);
+        }
     }
 
     private void SetInfo(File file) {
@@ -59,6 +66,17 @@ public class CardImport {
     }
     private Student Owner(String line) {
         String[] keywords = line.split(" / ");
-        return new Student(keywords[1], keywords[0], keywords[2], keywords[3]);
+        return new Student(keywords[0], keywords[1], keywords[2], keywords[3]);
+    }
+
+    private void Deserialize(String fileName) {
+        try {
+            FileInputStream fileInputStream = new FileInputStream(fileName);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            this.card = (Card) objectInputStream.readObject();
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
