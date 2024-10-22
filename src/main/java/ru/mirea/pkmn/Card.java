@@ -123,17 +123,26 @@ public class Card implements Serializable {
 
     @Override
     public String toString() {
-        return "Имя: " + name +
-                "\nСтадия покемона: " + pokemonStage +
-                "\nХП: " + hp +
-                "\nТип: " + pokemonType +
-                "\nЭволюционирует из: " + evolvesFrom + "\n" +
-                "\nУмения: " + skills +
-                "\nУязвимость: " + weaknessType +
-                "\nСопротивление: " + resistanceType +
+        String skl = "";
+        for (AttackSkill i : skills) {
+            skl += i.toString();
+        }
+        String output = "\n---------------------------------\n" +
+                pokemonStage + "\\" + name + "       " + hp + "hp" + " " + pokemonType +
+                "\n---------------------------------\n" +
+                "Эволюционирует из: " + ((evolvesFrom == null) ? "-" : evolvesFrom.getName()) +
+                "\n---------------------------------" +
+                skl +
+                "---------------------------------\n" +
+                "Уязвимость к: " + weaknessType + "\nСопротивление к: " + ((resistanceType == null) ? "None" : resistanceType) +
                 "\nЦена побега: " + retreatCost +
-                "\nСет: " + gameSet +
-                "\nОтметка легальности: " + regulationMark +
-                "\nВладелец: " + pokemonOwner;
+                "\n---------------------------------\n" +
+                "Сет: " + gameSet + "\nМетка: " + regulationMark +
+                "\n---------------------------------\n" +
+                "Владелец: " + ((pokemonOwner == null) ? "None" : pokemonOwner) +
+                "\n---------------------------------\n" +
+                ((evolvesFrom == null) ? "" : evolvesFrom);
+
+        return output;
     }
 }

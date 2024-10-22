@@ -50,11 +50,6 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "Имя='" + firstName + '\'' +
-                ", Фамилия='" + surName + '\'' +
-                ", Отчество='" + familyName + '\'' +
-                ", Группа='" + group + '\'' +
-                '}';
+        return  "\n" + surName + " " + firstName + " " + familyName + ",\n" + group;
     }
 }

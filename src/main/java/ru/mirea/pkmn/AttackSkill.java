@@ -50,11 +50,6 @@ public class AttackSkill implements Serializable {
 
     @Override
     public String toString() {
-        return "AttackSkill{" +
-                "Название='" + name + '\'' +
-                ", Описание='" + description + '\'' +
-                ", Цена='" + cost + '\'' +
-                ", Урон=" + damage +
-                '}';
+        return "\n" + cost + " - " + name + " - " + damage + "\nОписание: " + ((description == null) ? "None" : description) + "\n";
     }
 }
