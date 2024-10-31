@@ -42,6 +42,7 @@ public class CardImport {
             card.setGameSet(reader.readLine());
             card.setRegulationMark(reader.readLine().charAt(0));
             card.setPokemonOwner(Owner(reader.readLine()));
+            card.setNumber(reader.readLine());
             reader.close();
             fr.close();
         }

@@ -18,8 +18,9 @@ public class Card implements Serializable {
     private String gameSet;
     private char regulationMark;
     private Student pokemonOwner;
+    private String number;
 
-    public Card(PokemonStage pokemonStage, String name, int hp, EnergyType pokemonType, Card evolvesFrom, List<AttackSkill> skills, EnergyType weaknessType, EnergyType resistanceType, String retreatCost, String gameSet, char regulationMark, Student pokemonOwner) {
+    public Card(PokemonStage pokemonStage, String name, int hp, EnergyType pokemonType, Card evolvesFrom, List<AttackSkill> skills, EnergyType weaknessType, EnergyType resistanceType, String retreatCost, String gameSet, char regulationMark, Student pokemonOwner, String number) {
         this.pokemonStage = pokemonStage;
         this.name = name;
         this.hp = hp;
@@ -32,6 +33,7 @@ public class Card implements Serializable {
         this.gameSet = gameSet;
         this.regulationMark = regulationMark;
         this.pokemonOwner = pokemonOwner;
+        this.number = number;
     }
 
     public Card(){
@@ -121,6 +123,13 @@ public class Card implements Serializable {
         this.pokemonOwner = pokemonOwner;
     }
 
+    public String getNumber() {
+        return number;
+    }
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
     @Override
     public String toString() {
         String skl = "";
@@ -128,7 +137,7 @@ public class Card implements Serializable {
             skl += i.toString();
         }
         String output = "\n---------------------------------\n" +
-                pokemonStage + "\\" + name + "       " + hp + "hp" + " " + pokemonType +
+                pokemonStage + "\\" + name + "       " + hp + "hp " + pokemonType +
                 "\n---------------------------------\n" +
                 "Эволюционирует из: " + ((evolvesFrom == null) ? "-" : evolvesFrom.getName()) +
                 "\n---------------------------------" +
@@ -137,7 +146,7 @@ public class Card implements Serializable {
                 "Уязвимость к: " + weaknessType + "\nСопротивление к: " + ((resistanceType == null) ? "None" : resistanceType) +
                 "\nЦена побега: " + retreatCost +
                 "\n---------------------------------\n" +
-                "Сет: " + gameSet + "\nМетка: " + regulationMark +
+                "Сет: " + gameSet + "\nМетка: " + regulationMark + "       " + "Номер карты: " + number +
                 "\n---------------------------------\n" +
                 "Владелец: " + ((pokemonOwner == null) ? "None" : pokemonOwner) +
                 "\n---------------------------------\n" +
