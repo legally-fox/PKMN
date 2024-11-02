@@ -41,7 +41,8 @@ public class DatabaseServiceImpl implements DatabaseService {
 
         Statement statement = connection.createStatement();
         ResultSet result = statement.executeQuery("SELECT * FROM card WHERE \"name\" = '" + cardName + "'");
-        String id = null;
+        String id_student = null;
+        String id_evolution = null;
         while (result.next()) {
             card.setName(result.getString("name"));
             card.setHp(result.getInt("hp"));
@@ -59,9 +60,6 @@ public class DatabaseServiceImpl implements DatabaseService {
             card.setPokemonType(EnergyType.valueOf(result.getString("pokemon_type")));
             card.setRegulationMark(result.getString("regulation_mark").charAt(0));
             card.setNumber(result.getString("card_number"));
-            if (result.getString("evolves_from") != null) {
-                card.setEvolvesFrom( getCardFromDatabase(statement.executeQuery("SELECT * FROM card WHERE \"id\" = '" + result.getString("evolves_from") + "'").getString("name")) );
-            }
 
             ObjectMapper mapper = new ObjectMapper();
             JsonNode attack_json = mapper.readTree(result.getString("attack_skills"));
@@ -76,14 +74,18 @@ public class DatabaseServiceImpl implements DatabaseService {
                 attacksList.add(attack);
             }
             card.setSkills(attacksList);
+
             if (result.getString("pokemon_owner") != null) {
-                id = result.getString("pokemon_owner");
+                id_student = result.getString("pokemon_owner");
+            }
+            if (result.getString("evolves_from") != null) {
+                id_evolution = result.getString("evolves_from");
             }
         }
         result.close();
 
-        if (id != null) {
-            ResultSet studentInfo = statement.executeQuery("SELECT * FROM student WHERE id = '" + id + "'");
+        if (id_student != null) {
+            ResultSet studentInfo = statement.executeQuery("SELECT * FROM student WHERE id = '" + id_student + "'");
             while (studentInfo.next()) {
                 Student student = new Student(
                         studentInfo.getString("familyName"),
@@ -94,6 +96,11 @@ public class DatabaseServiceImpl implements DatabaseService {
                 card.setPokemonOwner(student);
             }
             studentInfo.close();
+        }
+        if (id_evolution != null) {
+            ResultSet evolution = statement.executeQuery("SELECT \"name\" FROM card WHERE id = '" + id_evolution + "'");
+            evolution.next();
+            card.setEvolvesFrom(getCardFromDatabase(evolution.getString("name")));
         }
         statement.close();
 

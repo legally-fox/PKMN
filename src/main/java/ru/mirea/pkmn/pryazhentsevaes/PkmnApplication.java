@@ -22,8 +22,8 @@ public class PkmnApplication {
         //System.out.println(pokemon.card.toString());
 
         DatabaseServiceImpl databaseService = new DatabaseServiceImpl();
-        databaseService.createPokemonOwner(pokemon.card.getPokemonOwner());
-        databaseService.saveCardToDatabase(pokemon.card);
+        //databaseService.createPokemonOwner(pokemon.card.getPokemonOwner());
+        //databaseService.saveCardToDatabase(pokemon.card);
         //Student student = databaseService.getStudentFromDatabase("Пряженцева Елизавета Сергеевна");
         Card card = databaseService.getCardFromDatabase("Heracross");
         System.out.println(card.toString());
